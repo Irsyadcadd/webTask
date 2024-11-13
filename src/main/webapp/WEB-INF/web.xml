@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>OrderCartV2</display-name>
+  <welcome-file-list>
+    <welcome-file>order-product-list.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <context-param>
+  	<param-name>jdbcUrl</param-name>
+  	<param-value>jdbc:mysql://localhost:3306/web_task</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>jdbcUser</param-name>
+  	<param-value>root</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>jdbcPass</param-name>
+  	<param-value></param-value>
+  </context-param>
+  
+  <filter>
+  	<filter-name>AuthenticationFilter</filter-name>
+  	<filter-class>com.practice.web.utils.AuthenticationFilter</filter-class>
+  </filter>
+
+	<security-constraint>
+	    <web-resource-collection>
+	        <web-resource-name>Product Catalog</web-resource-name>
+	        <url-pattern>/admin/*</url-pattern>
+	    </web-resource-collection>
+	    <auth-constraint>
+	        <role-name>admin</role-name>
+	    </auth-constraint>
+	</security-constraint>
+	
+	<security-role>
+	    <role-name>admin</role-name>
+	</security-role>
+	
+	<login-config>
+	    <auth-method>BASIC</auth-method>
+	    <realm-name>file</realm-name>
+	</login-config>
+</web-app>
